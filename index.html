@@ -34,21 +34,22 @@
     </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
-    <model-viewer
+    <model-viewer 
+        id="model"
         src="./model/sofa1/sofa1.gltf"
+        ios-src="./model/sofa1/sofa1.usdz"
         ar
         ar-modes="webxr scene-viewer quick-look"
         camera-controls
         auto-rotate
         shadow-intensity="1"
         exposure="1"
-        id="model"
         touch-action="pan-y"
         scale="0.5 0.5 0.5"
-        style="transform-origin: center center;">
-            <button slot="ar-button" id="ar-button">
-                View in your space
-            </button>
+        style="transform-origin: center center;"
+        ar-scale="fixed"
+        ar-placement="floor"
+        interaction-prompt="auto">
     </model-viewer>
 
 </body>
