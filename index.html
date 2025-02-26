@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AR Model Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="./js/ar-controls.js"></script>
 </head>
-    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.0/aframe/build/aframe-ar.js"></script>
 <body style="margin: 0; overflow: hidden;">
-    <a-scene embedded arjs='sourceType: webcam;'>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <!-- Marker pattern -->
         <a-marker preset="hiro">
+            <!-- Mô hình 3D của bạn -->
             <a-entity
+                gltf-model="./model/sofa1/sofa1.gltf"
+                scale="0.5 0.5 0.5"
                 position="0 0 0"
-                scale="1 1 1"
-                rotation="0 0 0" 
-                gltf-model="./model/sofa1/sofa1.gltf">
+                rotation="0 0 0"
+                ar-draggable>
             </a-entity>
         </a-marker>
-
-        <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-
-        <a-marker-camera preset="hiro"></a-marker-camera>
-
+        
+        <a-entity camera></a-entity>
     </a-scene>
 
-
+    <!-- UI Controls -->
+    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100;">
+        <button onclick="scaleUp()">Phóng to</button>
+        <button onclick="scaleDown()">Thu nhỏ</button>
+        <button onclick="rotateLeft()">Xoay trái</button>
+        <button onclick="rotateRight()">Xoay phải</button>
+    </div>
 </body>
-</html>
+</html> 
