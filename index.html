@@ -34,22 +34,17 @@
     </style>
 </head>
 <body style="margin: 0; overflow: hidden;">
-    <model-viewer 
-        id="model"
-        src="./model/sofa1/sofa1.gltf"
-        ios-src="./model/sofa1/sofa1.usdz"
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        camera-controls
-        auto-rotate
-        shadow-intensity="1"
-        exposure="1"
-        touch-action="pan-y"
-        scale="0.5 0.5 0.5"
-        style="transform-origin: center center;"
-        ar-scale="fixed"
-        ar-placement="floor"
-        interaction-prompt="auto">
+    <model-viewer src="model/sofa1/sofa1.gltf" 
+    ar ar-scale="fixed" 
+    camera-controls touch-action="pan-y" 
+    alt="A 3D model of an astronaut" 
+    shadow-intensity="2" 
+    skybox-height="2m" 
+    max-camera-orbit="auto 90deg auto"  
+    xr-environment>
+        <button slot="ar-button" id="ar-button">
+            View in your space
+        </button>
     </model-viewer>
 
 </body>
