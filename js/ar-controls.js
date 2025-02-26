@@ -1,77 +1,58 @@
-AFRAME.registerComponent("ar-draggable", {
-  init: function () {
-    this.el.addEventListener("touchstart", this.onTouchStart.bind(this));
-    this.el.addEventListener("touchmove", this.onTouchMove.bind(this));
-    this.el.addEventListener("touchend", this.onTouchEnd.bind(this));
+// Lấy reference đến model-viewer element
+const modelViewer = document.querySelector("model-viewer");
 
-    this.touchStarted = false;
-    this.initialPosition = new THREE.Vector3();
-    this.initialTouchPosition = new THREE.Vector2();
-  },
+// Hàm phóng to mô hình
+function scaleUp() {
+  const currentScale = modelViewer.scale.split(" ").map(Number);
+  const newScale = currentScale.map((value) => value * 1.2);
+  modelViewer.scale = newScale.join(" ");
+}
 
-  onTouchStart: function (evt) {
-    evt.preventDefault();
-    this.touchStarted = true;
-    this.initialPosition.copy(this.el.object3D.position);
-    this.initialTouchPosition.set(
-      evt.touches[0].clientX,
-      evt.touches[0].clientY
-    );
-  },
+// Hàm thu nhỏ mô hình
+function scaleDown() {
+  const currentScale = modelViewer.scale.split(" ").map(Number);
+  const newScale = currentScale.map((value) => value * 0.8);
+  modelViewer.scale = newScale.join(" ");
+}
 
-  onTouchMove: function (evt) {
-    if (!this.touchStarted) return;
+// Hàm xoay trái
+function rotateLeft() {
+  modelViewer.orientation = `0deg ${
+    parseFloat(modelViewer.orientation || 0) - 10
+  }deg 0deg`;
+}
 
-    const deltaX =
-      (evt.touches[0].clientX - this.initialTouchPosition.x) * 0.01;
-    const deltaY =
-      (evt.touches[0].clientY - this.initialTouchPosition.y) * 0.01;
+// Hàm xoay phải
+function rotateRight() {
+  modelViewer.orientation = `0deg ${
+    parseFloat(modelViewer.orientation || 0) + 10
+  }deg 0deg`;
+}
 
-    this.el.object3D.position.set(
-      this.initialPosition.x + deltaX,
-      this.initialPosition.y,
-      this.initialPosition.z + deltaY
-    );
-  },
+// Thêm xử lý touch events cho di chuyển mô hình
+let startX, startY;
+let isDragging = false;
 
-  onTouchEnd: function () {
-    this.touchStarted = false;
-  },
+modelViewer.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  isDragging = true;
 });
 
-// Các hàm điều khiển
-function scaleUp() {
-  const model = document.querySelector("[gltf-model]");
-  const scale = model.getAttribute("scale");
-  model.setAttribute(
-    "scale",
-    `${scale.x * 1.2} ${scale.y * 1.2} ${scale.z * 1.2}`
-  );
-}
+modelViewer.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
 
-function scaleDown() {
-  const model = document.querySelector("[gltf-model]");
-  const scale = model.getAttribute("scale");
-  model.setAttribute(
-    "scale",
-    `${scale.x * 0.8} ${scale.y * 0.8} ${scale.z * 0.8}`
-  );
-}
+  const deltaX = e.touches[0].clientX - startX;
+  const deltaY = e.touches[0].clientY - startY;
 
-function rotateLeft() {
-  const model = document.querySelector("[gltf-model]");
-  const rotation = model.getAttribute("rotation");
-  model.setAttribute(
-    "rotation",
-    `${rotation.x} ${rotation.y - 10} ${rotation.z}`
-  );
-}
+  // Cập nhật vị trí của mô hình
+  const currentPosition = modelViewer.cameraOrbit.split(" ");
+  modelViewer.cameraOrbit = `${deltaX * 0.5}deg ${deltaY * 0.5}deg 2m`;
 
-function rotateRight() {
-  const model = document.querySelector("[gltf-model]");
-  const rotation = model.getAttribute("rotation");
-  model.setAttribute(
-    "rotation",
-    `${rotation.x} ${rotation.y + 10} ${rotation.z}`
-  );
-}
+  startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+});
+
+modelViewer.addEventListener("touchend", () => {
+  isDragging = false;
+});
