@@ -1,11 +1,11 @@
 Model Information:
-* title:	Dining Table Glass
-* source:	https://sketchfab.com/3d-models/dining-table-glass-c41a27d7a1b24dc484bc603e1bc2d0ef
-* author:	Francesco Coldesina (https://sketchfab.com/topfrank2013)
+* title:	table and chair set
+* source:	https://sketchfab.com/3d-models/table-and-chair-set-970e7fee7c0a4d02b181072b59fac021
+* author:	den4ik4irik (https://sketchfab.com/den4ik4irik)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Dining Table Glass" (https://sketchfab.com/3d-models/dining-table-glass-c41a27d7a1b24dc484bc603e1bc2d0ef) by Francesco Coldesina (https://sketchfab.com/topfrank2013) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "table and chair set" (https://sketchfab.com/3d-models/table-and-chair-set-970e7fee7c0a4d02b181072b59fac021) by den4ik4irik (https://sketchfab.com/den4ik4irik) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
